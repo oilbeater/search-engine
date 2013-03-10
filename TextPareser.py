@@ -12,5 +12,10 @@ def trimUrl(findUrl , currentUrl):
    # if suffix!=None and suffix.group(1) not in ['html','htm','']:
    #     return ''
     return findUrl
+
+def trimKey(findkey):
+    return findkey.strip()
+
+
 findUrl = '   http://oilbeater.com/  '
 print trimUrl(findUrl,'http://oilbeater.com')
