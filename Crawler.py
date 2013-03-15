@@ -1,5 +1,4 @@
 ﻿#"-*- coding: utf-8 -*-" 
-print u"中无奈"
 import urllib2
 import socket
 import datetime
