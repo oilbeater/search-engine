@@ -17,14 +17,16 @@ def trimKey(findkey):
     return findkey.strip()
 
 def findTitle(text):
-    title = re.findall(r'<title>(.*?)(?=</title>)',text,re.IGNORECASE)
+    title = re.findall(r'<title[^>]*?>(.*?)(?=</title>)',text,re.IGNORECASE)
     return title
 
 def findHx(text):
-    Hx = re.findall(r'<h(\d)>(.*?)(?=</h\1>)',text,re.IGNORECASE)
+    Hx = re.findall(r'<h(\d)[^>]*?>(.*?)(?=</h\1>)',text,re.IGNORECASE)
     return Hx
 
-
-text = '<h1>asdfa<>dfa<1><title>asdfa<>dfa</h1><title>asdfa<>dfa</title>'
-print findHx(text)
+def findP(text):
+    P = re.findall(r'<p[^>]*?>(.*?)(?=</p>)',text,re.IGNORECASE)
+    return P
+text = '<p>asdfa<>dfa<1></p>asdfa<>dfa</h1><title>asdfa<>dfa</title>'
+print findP(text)
 
