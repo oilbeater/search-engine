@@ -16,6 +16,15 @@ def trimUrl(findUrl , currentUrl):
 def trimKey(findkey):
     return findkey.strip()
 
+def findTitle(text):
+    title = re.findall(r'<title>(.*?)(?=</title>)',text,re.IGNORECASE)
+    return title
 
-findUrl = '   http://oilbeater.com/  '
-print trimUrl(findUrl,'http://oilbeater.com')
+def findHx(text):
+    Hx = re.findall(r'<h(\d)>(.*?)(?=</h\1>)',text,re.IGNORECASE)
+    return Hx
+
+
+text = '<h1>asdfa<>dfa<1><title>asdfa<>dfa</h1><title>asdfa<>dfa</title>'
+print findHx(text)
+
