@@ -17,9 +17,14 @@ key2url = {'oilbeater':set(['oilbeater.com'])}
 while len(url_seeds) > 0 and len(urls) < 1000:
     source = url_seeds.pop()
     try:
-        url_visited.add(source)
         f = urllib2.urlopen(source,None,3)
         text =  unicode(f.read(),'utf-8')
+        wf = open(str(globalindex),'w')
+        wf.write(text.encode('utf-8'))
+        wf.close()
+        url2file[source] = str(globalindex)
+        globalindex = globalindex + 1
+        url_visited.add(source)
     except (urllib2.HTTPError,urllib2.URLError,socket.timeout):
         text = ''
     finds = re.findall(r'href=["\']([^"\']*)["\'][^>]*>([^<]*)<',text,re.I)
