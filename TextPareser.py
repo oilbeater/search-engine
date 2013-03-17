@@ -14,19 +14,20 @@ def trimUrl(findUrl , currentUrl):
     return findUrl
 
 def trimKey(findkey):
-    return findkey.strip()
-
+    trimedKey = findkey.strip()
+    return re.sub(r'<[^>]*?>',' ',trimedKey,0,re.IGNORECASE)
+    
 def findTitle(text):
-    title = re.findall(r'<title[^>]*?>(.*?)(?=</title>)',text,re.IGNORECASE)
-    return title
+    title = re.findall(r'<title[^>]*?>(.*?)(?=</title>)',text,re.IGNORECASE|re.MULTILINE|re.DOTALL)
+    return [trimKey(x) for x in title]
 
 def findHx(text):
-    Hx = re.findall(r'<h(\d)[^>]*?>(.*?)(?=</h\1>)',text,re.IGNORECASE)
-    return Hx
+    Hx = re.findall(r'<h(\d)[^>]*?>(.*?)(?=</h\1>)',text,re.IGNORECASE|re.MULTILINE|re.DOTALL)
+    return [trimKey(x[1]) for x in Hx]
 
 def findP(text):
-    P = re.findall(r'<p[^>]*?>(.*?)(?=</p>)',text,re.IGNORECASE)
-    return P
-text = '<p>asdfa<>dfa<1></p>asdfa<>dfa</h1><title>asdfa<>dfa</title>'
-print findP(text)
+    P = re.findall(r'<p[^>]*?>(.*?)(?=</p>)',text,re.IGNORECASE|re.MULTILINE|re.DOTALL)
+    return [trimKey(x) for x in P]
+text = '<h2>asdfa<>dfa<1></p>asdfa<>dfa</h2><h1>asdfa<>dfa</h1>'
+print trimKey(text)
 
